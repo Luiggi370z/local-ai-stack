@@ -1,0 +1,15 @@
+pyyaml>=6.0.2
+black>=24.2.0
+pre-commit>=3.6.0
+ruff>=0.3.2
+mypy>=1.8.0
+pyright>=1.1.399
+isort>=6.0.1
+types-requests>=2.31.0.20240125
+types-setuptools>=69.0.0.20240125
+types-PyYAML>=6.0.12.12
+types-python-dateutil>=2.8.19.14
+types-six>=1.16.21.20240513
+types-urllib3>=1.26.25.14
+pydantic>=2.6.1
+requests>=2.31.0

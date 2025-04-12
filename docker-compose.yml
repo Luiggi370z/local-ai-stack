@@ -6,7 +6,10 @@ volumes:
   flowise:
   caddy-data:
   caddy-config:
-  valkey-data:  
+  valkey-data:
+  npm_data:
+  npm_letsencrypt:
+  npm_conf:
 
 x-n8n: &service-n8n
   image: n8nio/n8n:latest
@@ -54,7 +57,7 @@ services:
     ports:
         - 3001:3001
     extra_hosts:
-      - "host.docker.internal:host-gateway"        
+      - "host.docker.internal:host-gateway"
     volumes:
         - ~/.flowise:/root/.flowise
     entrypoint: /bin/sh -c "sleep 3; flowise start"
@@ -78,7 +81,7 @@ services:
       - "-c"
       - "n8n import:credentials --separate --input=/backup/credentials && n8n import:workflow --separate --input=/backup/workflows"
     volumes:
-      - ./n8n/backup:/backup  
+      - ./n8n/backup:/backup
 
   n8n:
     <<: *service-n8n
@@ -171,7 +174,22 @@ services:
       driver: "json-file"
       options:
         max-size: "1m"
-        max-file: "1"      
+        max-file: "1"
+
+  npm:
+    container_name: nginx-proxy-manager
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '81:81'
+      - '443:443'
+    volumes:
+      - npm_data:/data
+      - npm_letsencrypt:/etc/letsencrypt
+      - npm_conf:/etc/nginx/conf.d
+    networks:
+      - default
 
   ollama-cpu:
     profiles: ["cpu"]
