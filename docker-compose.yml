@@ -12,7 +12,7 @@ volumes:
   npm_conf:
 
 x-n8n: &service-n8n
-  image: n8nio/n8n:latest
+  image: n8nio/n8n:1.88.0
   environment:
     - DB_TYPE=postgresdb
     - DB_POSTGRESDB_HOST=db

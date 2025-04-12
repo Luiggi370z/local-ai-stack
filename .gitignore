@@ -7,3 +7,4 @@ shared/
 searxng/uwsgi.ini
 searxng/settings.yml
 .ruff_cache
+*.pyc
