@@ -3,7 +3,7 @@
 volumes/
 shared/
 /supabase/
-/litellm/
+/litellm
 searxng/uwsgi.ini
 searxng/settings.yml
 .ruff_cache
