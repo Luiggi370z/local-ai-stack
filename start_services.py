@@ -15,13 +15,13 @@ import subprocess
 import time
 from typing import Optional
 
-from additional_stacks.lite_llm.service import (
-    LITELLM_DOCKER_FILE_ARGS,
-    clone_litellm_repo,
-    prepare_litellm_env,
-    start_litellm,
-    update_litellm_docker_compose,
-)
+# from additional_stacks.lite_llm.service import (
+#     LITELLM_DOCKER_FILE_ARGS,
+#     # clone_litellm_repo,
+#     # prepare_litellm_env,
+#     # start_litellm,
+#     # update_litellm_docker_compose,
+# )
 from additional_stacks.supabase.service import (
     SUPABASE_DOCKER_FILE_ARGS,
     clone_supabase_repo,
@@ -48,7 +48,6 @@ def stop_existing_containers() -> None:
             "-f",
             "docker-compose.yml",
             *SUPABASE_DOCKER_FILE_ARGS,
-            *LITELLM_DOCKER_FILE_ARGS,
             "down",
         ]
     )
@@ -259,9 +258,9 @@ def main() -> None:
     clone_supabase_repo()
     prepare_supabase_env()
 
-    clone_litellm_repo()
-    prepare_litellm_env()
-    update_litellm_docker_compose()
+    # clone_litellm_repo()
+    # prepare_litellm_env()
+    # update_litellm_docker_compose()
 
     # Generate SearXNG secret key and check docker-compose.yml
     generate_searxng_secret_key()
@@ -276,12 +275,12 @@ def main() -> None:
     print("Waiting for Supabase to initialize...")
     time.sleep(10)
 
-    # Start LiteLLM first
-    start_litellm()
+    # # Start LiteLLM first
+    # start_litellm()
 
-    # Give LiteLLM some time to initialize
-    print("Waiting for LiteLLM to initialize...")
-    time.sleep(10)
+    # # Give LiteLLM some time to initialize
+    # print("Waiting for LiteLLM to initialize...")
+    # time.sleep(10)
 
     # Then start the local AI services
     start_local_ai(args.profile)

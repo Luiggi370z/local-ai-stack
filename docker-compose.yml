@@ -7,16 +7,13 @@ volumes:
   caddy-data:
   caddy-config:
   valkey-data:
-  npm_data:
-  npm_letsencrypt:
-  npm_conf:
   langfuse_postgres_data:
   langfuse_clickhouse_data:
   langfuse_clickhouse_logs:
   langfuse_minio_data:
 
 x-n8n: &service-n8n
-  image: n8nio/n8n:1.88.0
+  image: n8nio/n8n:latest
   environment:
     - DB_TYPE=postgresdb
     - DB_POSTGRESDB_HOST=db
@@ -326,20 +323,6 @@ services:
         max-size: "1m"
         max-file: "1"
 
-  npm:
-    container_name: nginx-proxy-manager
-    image: 'jc21/nginx-proxy-manager:latest'
-    restart: unless-stopped
-    ports:
-      - '80:80'
-      - '81:81'
-      - '443:443'
-    volumes:
-      - npm_data:/data
-      - npm_letsencrypt:/etc/letsencrypt
-      - npm_conf:/etc/nginx/conf.d
-    networks:
-      - default
 
   ollama-cpu:
     profiles: ["cpu"]
